@@ -1,5 +1,7 @@
 package com.nana.bankapp.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.nana.bankapp.model.Account;
 import com.nana.bankapp.services.AccountService;
@@ -46,26 +50,36 @@ public class AccountContoller {
 	
 	@RequestMapping(value = "/saveAccount", method = RequestMethod.POST)
 	public String saveAccount(@Valid @ModelAttribute("account") Account account, BindingResult result) {
-		System.out.println("masuk pak eko.");
-		
-		System.out.println(account.getAccountNo());
-		System.out.println(account.getAccountHolderName());
-		System.out.println(account.getAccountType());
-		System.out.println(account.getPsCode());
-		System.out.println(account.getDateOfBirth());
-		System.out.println(account.getBalance());
-		
-		if ( result.hasErrors() ) {
+		if (result.hasErrors() ) {
 			return "account-form";
 		} else {
 			accountService.saveAccount(account);
 			return "redirect:/list";
-		}
-		
+		}		
 	}
-
 	
-	/*@RequestMapping(value = "/saveAccount", method = RequestMethod.POST)
+	@GetMapping("/list")
+	public String listAccounts(Model model) {
+		List<Account> accounts = accountService.getAccounts();
+		model.addAttribute("accounts", accounts);
+		return "listAccounts";
+	}
+	
+	@GetMapping("/edit")
+	public String updateAccount(@RequestParam("accountNo") int accountNo, Model model) {
+		Account account = accountService.getAccount(new Integer(accountNo));
+		model.addAttribute("account", account);
+		return "account-form";
+	}
+	
+	
+	@GetMapping("/delete")
+	public String deleteAccount(@RequestParam("accountNo") int accountNo, Model model) {
+		accountService.deleteAccount(accountNo);
+		return "redirect:/list";
+	}
+	
+	/*  @RequestMapping(value = "/saveAccount", method = RequestMethod.POST)
 		public String saveAccount(Model model, HttpServletRequest request) {
 		String acNo = request.getParameter("accountNo");
 		String customerName = request.getParameter("accountHolderName");
