@@ -16,6 +16,8 @@
 			authentication-failure-url="/user/login?error=true"
 			username-parameter="username" password-parameter="password"
 			default-target-url="/list" />
+			
+			<csrf disabled="true"/>
 	</http>
 
 	<authentication-manager>

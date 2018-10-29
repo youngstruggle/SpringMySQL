@@ -38,6 +38,12 @@ public class AccountContoller {
 	public String showHomePage() {
 		return "index";
 	}
+	
+	@RequestMapping(value="/find",method=RequestMethod.GET)
+	public String viewAccount(Model model) {
+		System.out.println("masuk ke findout pak eko.");
+		return "findAccount";
+	}
 
 	@RequestMapping("/new")
 	public String newAccount(Model model) {
@@ -76,7 +82,6 @@ public class AccountContoller {
 		model.addAttribute("account", account);
 		return "account-form";
 	}
-	
 	
 	@GetMapping("/delete")
 	public String deleteAccount(@RequestParam("accountNo") int accountNo, Model model) {
