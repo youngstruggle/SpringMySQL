@@ -17,62 +17,98 @@
 
 </head>
 <body>
-	<h2>Please</h2>
-	<form:form modelAttribute="account" action="saveAccount" method="post">
-		<table>
-			<tr>
-				<td><spring:message code="lbl.accountNo" /></td>
-				<td>
-					<form:input path="accountNo" size="30" />
-					<form:errors path="accountNo" cssClass="error"/>
-				</td>
-			
-			</tr>
-			<tr>
-				<td><spring:message code="lbl.accountHolderName" /></td>
-				<td>
-					<form:input path="accountHolderName" size="30" />
-					<form:errors path="accountHolderName" cssClass="error"/>	
-				</td>
-			</tr>
-			<tr>
-				<td><spring:message code="lbl.balance" /></td>
-				<td>
-					<form:input path="balance" size="30" />
-					<form:errors path="balance" cssClass="error"/>
-				</td>
-			</tr>
-			<tr>
-				<td><spring:message code="lbl.accountType" /></td>
-				<td>
-					<form:select path="accountType" >
-						<form:option value="">Select Account Type</form:option>
-						<form:option value="SAVINGS">Savings</form:option>
-						<form:option value="CURRENT">Current</form:option>
-					</form:select>
-					<form:errors path="accountType" cssClass="error"/>
-				</td>
-			</tr>
-			<tr>
-				<td><spring:message code="lbl.dob" /></td>
-				<td>
-					<form:input path="dateOfBirth" size="30" />
-					<form:errors path="dateOfBirth" cssClass="error"/>
-				</td>
-			</tr>
-			<tr>
-				<td><spring:message code="lbl.psCode" /></td>
-				<td>
-					<form:input path="psCode" size="30" />
-					<form:errors path="psCode" cssClass="error"/>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="Save Account" name="btnSubmit" />
-			</tr>
+	<div class="container">
+		<%@ include file="header.jsp"%>
 
-		</table>
-	</form:form>
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+				<h2 class="page-header">Please Fill Up the form details</h2>
+
+			</div>
+		</div>
+
+		<div class="row">
+
+			<div class="col-6">
+				<form:form modelAttribute="account" action="saveAccount"
+					cssClass="form-horizontal" role="form" method="post">
+
+					<div class="form-group row">
+						<label for="accountNo" class="col-6 col-form-label"><spring:message
+								code="lbl.accountNo" /></label>
+						<div class="col-6">
+							<form:input path="accountNo" cssClass="form-control" />
+							<form:errors path="accountNo" cssClass="alert-danger" />
+							<text class="alert-danger">${message}</text>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="accountHolderName" class="col-6 col-form-label"><spring:message
+								code="lbl.accountHolderName" /></label>
+						<div class="col-6">
+							<form:input path="accountHolderName" cssClass="form-control" />
+							<form:errors path="accountHolderName" cssClass="alert-danger" />
+							<text class="alert-danger">${message}</text>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="balance" class="col-6 col-form-label"><spring:message
+								code="lbl.balance" /></label>
+						<div class="col-6">
+							<form:input path="balance" cssClass="form-control" />
+							<form:errors path="balance" cssClass="alert-danger" />
+							<text class="alert-danger">${message}</text>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="accountType" class="col-6 col-form-label"><spring:message
+								code="lbl.accountType" /></label>
+						<div class="col-6">
+							<form:select path="accountType" cssClass="form-control">
+								<form:option value="">Select Account Type</form:option>
+								<form:option value="SAVINGS">Savings</form:option>
+								<form:option value="CURRENT">Current</form:option>
+							</form:select>
+							<form:errors path="accountType" cssClass="alert-danger" />
+							<text class="alert-danger">${message}</text>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="dateOfBirth" class="col-6 col-form-label"><spring:message
+								code="lbl.dob" /></label>
+						<div class="col-6">
+							<form:input path="dateOfBirth" cssClass="form-control" />
+							<form:errors path="dateOfBirth" cssClass="alert-danger" />
+							<text class="alert-danger">${message}</text>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<label for="psCode" class="col-6 col-form-label"><spring:message
+								code="lbl.psCode" /></label>
+						<div class="col-6">
+							<form:input path="psCode" cssClass="form-control" />
+							<form:errors path="psCode" cssClass="alert-danger" />
+							<text class="alert-danger">${message}</text>
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="offset-6 col-6">
+							<input type="submit" value="Save Account" class="btn btn-primary" name="btnSubmit" />
+						</div>
+					</div>
+
+				</form:form>
+			</div>
+		</div>
+
+		<%@ include file="footer.jsp"%>
+	</div>
+
 </body>
 </html>

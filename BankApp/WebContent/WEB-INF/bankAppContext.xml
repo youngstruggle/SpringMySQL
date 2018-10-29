@@ -14,9 +14,11 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<context:component-scan
-		base-package="com.nana.bankapp"></context:component-scan>
+	<context:component-scan base-package="com.nana.bankapp"></context:component-scan>
+
 	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<mvc:resources location="/resources/images" mapping="/resource/**" />
 
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -31,19 +33,23 @@
 				<value>WEB-INF/account</value>
 			</list>
 		</property>
-		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
-	
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-		<property name="driverClass" value="com.mysql.jdbc.Driver" />	
-		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/psbankdb?useSSL=false" />
-		<property name ="user" value="root" />
-		<property name="password" value="" /> 
+
+	<bean id="dataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/psbankdb?useSSL=false" />
+		<property name="user" value="root" />
+		<property name="password" value="" />
 	</bean>
-	
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.nana.bankapp"/>
+		<property name="packagesToScan" value="com.nana.bankapp" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -51,11 +57,12 @@
 			</props>
 		</property>
 	</bean>
-	
-	<bean id="myTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory"/>		
+
+	<bean id="myTransactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
-	<tx:annotation-driven transaction-manager="myTransactionManager"/>
+	<tx:annotation-driven transaction-manager="myTransactionManager" />
 
 </beans>
